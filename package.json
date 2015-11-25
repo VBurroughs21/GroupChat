@@ -1,0 +1,9 @@
+{
+  "name": "Survey",
+  "description": "Application to collect data from form.",
+  "dependencies": {
+    "ejs": "1.0.0",
+    "express": "^4.10.2",
+    "socket.io": "^1.3.7"
+  }
+}

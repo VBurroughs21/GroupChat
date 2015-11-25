@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Group Chat</title>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    	<script type="text/javascript">
+        	
+        	$(document).ready(function () {
+	            
+	        var name = prompt("Name?");
+	        
+				var socket = io.connect();
+				
+	            $('#send').click(function() {
+	            	var message = $('#message').val();
+	            	var session_id = socket.io.engine.id;
+	            	socket.emit('submit_message', {name: name, message: message, session: session_id});
+	            	$('#message').val('');
+	            	return false;
+
+	            });
+
+
+	            socket.on('new_message', function(data) {
+	            	$('#chat').append("<li>" + data. name + ": " + data.message + "</li>");
+	            })
+	        });
+        	
+    	</script>
+		<style>
+			ul {
+				list-style-type: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<h3>Conversation Board</h3>
+			<div>
+				<ul id="chat">
+				</ul>
+			</div>
+			<form>
+				<input type="text" id="message" placeholder="Type message"/>
+				<button id="send">Send</button>
+			</form>
+		</div>
+	</body>
+</html>
